@@ -1,0 +1,227 @@
+:root {
+  --bg-0: #081226;
+  --bg-1: #10305a;
+  --bg-2: #1f7a8c;
+  --glow: #f3ff8f;
+  --hot: #ff6a3d;
+  --text: #f4f8ff;
+  --panel: rgba(8, 18, 38, 0.56);
+  --line: rgba(255, 255, 255, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(243, 255, 143, 0.22) 0%, transparent 34%),
+    radial-gradient(circle at 82% 8%, rgba(255, 106, 61, 0.16) 0%, transparent 40%),
+    linear-gradient(135deg, var(--bg-0) 0%, var(--bg-1) 58%, var(--bg-2) 100%);
+  overflow: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(transparent 95%, rgba(255, 255, 255, 0.06) 96%),
+    linear-gradient(90deg, transparent 95%, rgba(255, 255, 255, 0.05) 96%);
+  background-size: 26px 26px;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.app {
+  min-height: 100%;
+  position: relative;
+}
+
+.hud {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.top {
+  position: fixed;
+  left: 12px;
+  top: 10px;
+  z-index: 10;
+  padding: 0;
+  pointer-events: none;
+}
+
+.brand {
+  font-family: "Bungee", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  letter-spacing: 1.2px;
+  font-size: clamp(1.8rem, 4.2vw, 3.2rem);
+  text-shadow: 0 0 12px rgba(243, 255, 143, 0.6);
+}
+
+.rainbow-glow {
+  background: linear-gradient(
+    90deg,
+    #ff3b3b 0%,
+    #ffa63b 16%,
+    #ffe43b 32%,
+    #55ff78 48%,
+    #3bd7ff 64%,
+    #6d7bff 80%,
+    #d14dff 100%
+  );
+  background-size: 220% 220%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbowShift 2s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(130, 220, 255, 0.9));
+}
+
+.pill {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+  font-weight: 600;
+}
+
+.game-shell {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  border-radius: 0;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.42),
+    0 0 42px rgba(243, 255, 143, 0.12);
+}
+
+canvas {
+  width: 100%;
+  height: 100vh;
+  display: block;
+  background: transparent;
+}
+
+.hud.score {
+  position: absolute;
+  right: 18px;
+  top: 16px;
+  display: grid;
+  gap: 2px;
+  background: rgba(8, 18, 38, 0.52);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 14px;
+  backdrop-filter: blur(10px);
+}
+
+.score-label {
+  font-size: 0.75rem;
+  opacity: 0.82;
+}
+
+.score-value {
+  font-family: "Bungee", sans-serif;
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  line-height: 1;
+  color: var(--glow);
+}
+
+.best {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 10px;
+  padding: 24px;
+  background: linear-gradient(180deg, rgba(8, 18, 38, 0.4), rgba(8, 18, 38, 0.72));
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Bungee", sans-serif;
+  letter-spacing: 0.8px;
+  font-size: clamp(1.4rem, 4vw, 2.6rem);
+  text-shadow: 0 0 18px rgba(255, 106, 61, 0.65);
+}
+
+.best-score-line {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.82em;
+  color: #e8f4ff;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  justify-self: center;
+  margin-top: 14px;
+  border: 0;
+  border-radius: 14px;
+  padding: 16px 30px;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.9px;
+  color: #081226;
+  background: linear-gradient(90deg, var(--glow), #fff5a7);
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+  box-shadow: 0 8px 20px rgba(243, 255, 143, 0.35);
+}
+
+button:hover {
+  transform: translateY(-1px) scale(1.01);
+}
+
+button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+@keyframes rainbowShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@media (max-width: 720px) {
+  .hud.score {
+    right: 10px;
+    top: 10px;
+  }
+}
